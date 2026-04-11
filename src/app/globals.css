@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+/* Prevent iOS zoom on input focus */
+@media (max-width: 768px) {
+  button {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Landscape mobile: tighter padding */
+@media (max-height: 500px) and (orientation: landscape) {
+  body {
+    font-size: 14px;
+  }
+}
