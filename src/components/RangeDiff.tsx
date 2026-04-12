@@ -9,13 +9,23 @@ const OPEN_SCENARIOS: Record<string, string> = {
   btn: "btn-open",
 };
 
+/** 全ポジション共通の核（覚え方ガイドのセクション1と対応） */
+const CORE_HANDS = new Set([
+  "AA","KK","QQ","JJ",
+  "AKs","AQs","AJs","ATs",
+  "KQs",
+  "AKo",
+]);
+
 const POSITION_PAIRS = [
+  { base: "core", target: "ep", label: "コア → EP" },
   { base: "ep", target: "co", label: "EP → CO" },
   { base: "co", target: "btn", label: "CO → BTN" },
   { base: "ep", target: "btn", label: "EP → BTN" },
 ];
 
 function getOpenRaiseHands(positionId: string): Set<string> {
+  if (positionId === "core") return CORE_HANDS;
   const pos = positions.find((p) => p.id === positionId);
   if (!pos) return new Set();
   const scenarioId = OPEN_SCENARIOS[positionId];
@@ -25,6 +35,13 @@ function getOpenRaiseHands(positionId: string): Set<string> {
   return new Set(raiseRange?.hands ?? []);
 }
 
+const DISPLAY_NAMES: Record<string, string> = {
+  core: "コア",
+  ep: "EP",
+  co: "CO",
+  btn: "BTN",
+};
+
 export function RangeDiff() {
   const [pairIndex, setPairIndex] = useState(0);
   const pair = POSITION_PAIRS[pairIndex];
@@ -32,10 +49,8 @@ export function RangeDiff() {
   const baseHands = getOpenRaiseHands(pair.base);
   const targetHands = getOpenRaiseHands(pair.target);
 
-  const baseName =
-    positions.find((p) => p.id === pair.base)?.shortName ?? pair.base;
-  const targetName =
-    positions.find((p) => p.id === pair.target)?.shortName ?? pair.target;
+  const baseName = DISPLAY_NAMES[pair.base] ?? pair.base;
+  const targetName = DISPLAY_NAMES[pair.target] ?? pair.target;
 
   return (
     <div>
