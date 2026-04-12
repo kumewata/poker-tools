@@ -103,12 +103,18 @@ export default function Home() {
       </div>
 
       {/* Navigation links */}
-      <div className="mt-5 flex gap-2 justify-center">
+      <div className="mt-5 flex gap-2 justify-center flex-wrap">
         <Link
           href="/tips"
           className="px-5 py-2.5 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm hover:bg-slate-200 transition-all"
         >
           覚え方のコツ
+        </Link>
+        <Link
+          href="/skills"
+          className="px-5 py-2.5 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm hover:bg-slate-200 transition-all"
+        >
+          ポストフロップ
         </Link>
         <Link
           href="/quiz"
