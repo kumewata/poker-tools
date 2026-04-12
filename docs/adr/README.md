@@ -14,3 +14,4 @@ tags: [ADR, アーキテクチャ, インデックス]
 | [ADR-001](ADR-001-static-spa-architecture.md) | Next.js 静的 SPA + GitHub Pages | Accepted |
 | [ADR-002](ADR-002-unified-range-data.md) | ハンドレンジデータの一元管理 | Accepted |
 | [ADR-003](ADR-003-hand-quiz-feature.md) | プリフロップ ハンドクイズ機能 | Accepted |
+| [ADR-004](ADR-004-quiz-pool-random-sampling.md) | クイズ問題プール拡充とランダムサンプリング出題 | Accepted |

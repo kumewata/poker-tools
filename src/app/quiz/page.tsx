@@ -16,8 +16,9 @@ function shuffle<T>(array: T[]): T[] {
 }
 
 export default function QuizPage() {
+  const QUIZ_SIZE = 20;
   const [shuffleKey, setShuffleKey] = useState(0);
-  const shuffled = useMemo(() => shuffle(quizQuestions), [shuffleKey]);
+  const shuffled = useMemo(() => shuffle(quizQuestions).slice(0, QUIZ_SIZE), [shuffleKey]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [correctCount, setCorrectCount] = useState(0);
@@ -60,10 +61,14 @@ export default function QuizPage() {
         >
           &larr; レンジ表
         </Link>
-        <h1 className="text-base font-extrabold text-slate-800">
-          ハンドクイズ
-        </h1>
-        <div className="w-16" />
+        <div className="text-right">
+          <h1 className="text-base font-extrabold text-slate-800">
+            ハンドクイズ
+          </h1>
+          <p className="text-xs text-slate-400">
+            全{quizQuestions.length}問から{QUIZ_SIZE}問を出題
+          </p>
+        </div>
       </div>
 
       <div className="flex flex-col items-center">
