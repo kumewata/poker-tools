@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { positions, LEGEND, type ActionRange } from "@/data/ranges";
 import { HandGrid } from "@/components/HandGrid";
 import { PositionSelector } from "@/components/PositionSelector";
@@ -101,8 +102,18 @@ export default function Home() {
         )}
       </div>
 
+      {/* Quiz link */}
+      <div className="mt-5 flex justify-center">
+        <Link
+          href="/quiz"
+          className="px-5 py-2.5 rounded-lg bg-slate-800 text-white font-bold text-sm hover:bg-slate-700 transition-all"
+        >
+          ハンドクイズに挑戦 &rarr;
+        </Link>
+      </div>
+
       {/* Legend */}
-      <div className="mt-5 flex flex-wrap gap-3 justify-center bg-white/60 rounded-lg py-2.5 px-4 backdrop-blur-sm">
+      <div className="mt-3 flex flex-wrap gap-3 justify-center bg-white/60 rounded-lg py-2.5 px-4 backdrop-blur-sm">
         {LEGEND.map(({ color, label }) => (
           <div key={label} className="flex items-center gap-1.5">
             <div
