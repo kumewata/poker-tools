@@ -4,6 +4,7 @@ import { type QuizQuestion } from "@/data/quiz-data";
 
 interface QuizCardProps {
   question: QuizQuestion;
+  questionNumber: number;
   totalQuestions: number;
   selectedIndex: number | null;
   onSelect: (index: number) => void;
@@ -11,6 +12,7 @@ interface QuizCardProps {
 
 export function QuizCard({
   question,
+  questionNumber,
   totalQuestions,
   selectedIndex,
   onSelect,
@@ -22,7 +24,7 @@ export function QuizCard({
       {/* Header */}
       <div className="bg-slate-800 text-white px-4 py-2.5 flex items-center justify-between">
         <span className="font-bold text-sm">
-          ハンド {question.id} / {totalQuestions}
+          問題 {questionNumber} / {totalQuestions}
         </span>
         <span className="text-xs text-slate-300 bg-slate-700 px-2.5 py-1 rounded-full">
           {question.position}

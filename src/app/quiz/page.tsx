@@ -1,18 +1,29 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import { quizQuestions } from "@/data/quiz-data";
 import { QuizCard } from "@/components/QuizCard";
 import { QuizResult } from "@/components/QuizResult";
 
+function shuffle<T>(array: T[]): T[] {
+  const a = [...array];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
 export default function QuizPage() {
+  const [shuffleKey, setShuffleKey] = useState(0);
+  const shuffled = useMemo(() => shuffle(quizQuestions), [shuffleKey]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [correctCount, setCorrectCount] = useState(0);
   const [finished, setFinished] = useState(false);
 
-  const question = quizQuestions[currentIndex];
+  const question = shuffled[currentIndex];
   const isCorrect = selectedAnswer === question.correctIndex;
 
   function handleSelect(index: number) {
@@ -23,7 +34,7 @@ export default function QuizPage() {
   }
 
   function handleNext() {
-    if (currentIndex < quizQuestions.length - 1) {
+    if (currentIndex < shuffled.length - 1) {
       setCurrentIndex((i) => i + 1);
       setSelectedAnswer(null);
     } else {
@@ -32,6 +43,7 @@ export default function QuizPage() {
   }
 
   function handleRestart() {
+    setShuffleKey((k) => k + 1);
     setCurrentIndex(0);
     setSelectedAnswer(null);
     setCorrectCount(0);
@@ -59,7 +71,8 @@ export default function QuizPage() {
           <>
             <QuizCard
               question={question}
-              totalQuestions={quizQuestions.length}
+              questionNumber={currentIndex + 1}
+              totalQuestions={shuffled.length}
               selectedIndex={selectedAnswer}
               onSelect={handleSelect}
             />
@@ -67,7 +80,7 @@ export default function QuizPage() {
               <QuizResult
                 correct={isCorrect}
                 explanation={question.explanation}
-                isLast={currentIndex === quizQuestions.length - 1}
+                isLast={currentIndex === shuffled.length - 1}
                 rangePositionId={question.rangePositionId}
                 rangeScenarioId={question.rangeScenarioId}
                 onNext={handleNext}
@@ -82,12 +95,12 @@ export default function QuizPage() {
             </div>
             <div className="px-6 py-8 text-center">
               <div className="text-5xl font-black text-slate-800 mb-2">
-                {correctCount} / {quizQuestions.length}
+                {correctCount} / {shuffled.length}
               </div>
               <div className="text-sm text-slate-500 mb-6">
-                {correctCount === quizQuestions.length
+                {correctCount === shuffled.length
                   ? "パーフェクト!"
-                  : correctCount >= quizQuestions.length * 0.7
+                  : correctCount >= shuffled.length * 0.7
                     ? "よくできました!"
                     : "レンジ表を復習しましょう"}
               </div>
