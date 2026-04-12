@@ -6,6 +6,10 @@ export interface QuizQuestion {
   options: string[];
   correctIndex: number;
   explanation: string;
+  /** 関連するレンジ表のポジションID */
+  rangePositionId: string;
+  /** 関連するレンジ表のシナリオID */
+  rangeScenarioId: string;
 }
 
 export const quizQuestions: QuizQuestion[] = [
@@ -19,6 +23,8 @@ export const quizQuestions: QuizQuestion[] = [
     correctIndex: 2,
     explanation:
       "ポットには既に10〜15BBのデッドマネーがある。A4sはスーテッドエースでポストフロップでも十分プレイできるハンド。ボタンという最良ポジションを活かし、レイズしてポットを獲りにいくべき。リンパーの多くはフォールドするか、コールしても不利なポジションでプレイすることになる。",
+    rangePositionId: "btn",
+    rangeScenarioId: "btn-open",
   },
   {
     id: 2,
@@ -30,6 +36,8 @@ export const quizQuestions: QuizQuestion[] = [
     correctIndex: 0,
     explanation:
       "A8oはオフスートで、レイズに対してコールするには弱すぎる。マルチウェイポットではドミネートされるリスクが高い（AK、AQ、AJなどに負けている）。ポジションの優位性があっても、このハンドではフォールドが正しい。スーテッドであればコールも検討できる。",
+    rangePositionId: "btn",
+    rangeScenarioId: "btn-vs-loose",
   },
   {
     id: 3,
@@ -41,6 +49,8 @@ export const quizQuestions: QuizQuestion[] = [
     correctIndex: 1,
     explanation:
       "AAはプリフロップ最強のハンド。タイトなプレイヤーのレイズに対しても、必ずリレイズ（3-Bet）すべき。スロープレイ（コール）はマルチウェイになるリスクを生み、AAの価値を下げる。ヘッズアップに持ち込み、ポストフロップでもポジションを活かしてプレイする。",
+    rangePositionId: "btn",
+    rangeScenarioId: "btn-vs-tight",
   },
   {
     id: 4,
@@ -52,6 +62,8 @@ export const quizQuestions: QuizQuestion[] = [
     correctIndex: 1,
     explanation:
       "AJsは強いハンドだが、SBのレイズサイズが大きく、ポジションが不利。リレイズするにはやや弱く、フォールドするには強すぎる。コールしてフロップを見るのが最も期待値が高い。ただしSBが非常にタイトなプレイヤーであれば、フォールドも選択肢になる。AA、AK、KQなどにはドミネートされている可能性がある。",
+    rangePositionId: "ep",
+    rangeScenarioId: "ep-vs-loose",
   },
   {
     id: 5,
@@ -63,6 +75,8 @@ export const quizQuestions: QuizQuestion[] = [
     correctIndex: 2,
     explanation:
       "K9sはスーテッドでそこそこの強さがあり、5人のリンパーに対してはレイズが正しい。SBからのレイズはスクイーズとして機能し、多くのリンパーをフォールドさせることができる。リンプでの参加はポジション最悪のSBで6人ポットを作ることになり、不利。",
+    rangePositionId: "blinds",
+    rangeScenarioId: "blinds-limp",
   },
   {
     id: 6,
@@ -74,5 +88,7 @@ export const quizQuestions: QuizQuestion[] = [
     correctIndex: 2,
     explanation:
       "QQはプレミアムハンド。COの3-Betに対して、ボタンから4-Betすることで相手のレンジを絞り込む。コールするとマルチウェイになりやすく、QQの勝率が大幅に下がる。4-Betに対してオールインで返されたら、相手のレンジ次第でコール/フォールドを判断する。",
+    rangePositionId: "btn",
+    rangeScenarioId: "btn-vs-loose",
   },
 ];

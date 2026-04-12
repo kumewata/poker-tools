@@ -68,6 +68,8 @@ export default function QuizPage() {
                 correct={isCorrect}
                 explanation={question.explanation}
                 isLast={currentIndex === quizQuestions.length - 1}
+                rangePositionId={question.rangePositionId}
+                rangeScenarioId={question.rangeScenarioId}
                 onNext={handleNext}
               />
             )}
