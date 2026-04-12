@@ -109,13 +109,19 @@ export default function QuizPage() {
                     ? "よくできました!"
                     : "レンジ表を復習しましょう"}
               </div>
-              <div className="flex gap-2 justify-center">
+              <div className="flex gap-2 justify-center flex-wrap">
                 <button
                   onClick={handleRestart}
                   className="px-5 py-2.5 rounded-lg bg-slate-800 text-white font-bold text-sm hover:bg-slate-700 transition-all"
                 >
                   もう一度
                 </button>
+                <Link
+                  href="/tips"
+                  className="px-5 py-2.5 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm hover:bg-slate-200 transition-all"
+                >
+                  覚え方のコツ
+                </Link>
                 <Link
                   href="/"
                   className="px-5 py-2.5 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm hover:bg-slate-200 transition-all"
